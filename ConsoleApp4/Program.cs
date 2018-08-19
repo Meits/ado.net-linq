@@ -70,16 +70,48 @@ namespace ConsoleApp4
             //}
 
             //4. Выбрать имена, фамилии и возраст студентов из Киева, возраст которых превышает 23 года
-            var result =
-               from e in employees
-               join d in departments on e.DepId equals d.Id
-               where d.City != "Kyiv" && e.Age > 23
-               select new { Firstname = e.FirstName, Lastname = e.LastName, Age = e.Age };
+            //var result =
+            //   from e in employees
+            //   join d in departments on e.DepId equals d.Id
+            //   where d.City != "Kyiv" && e.Age > 23
+            //   select new { Firstname = e.FirstName, Lastname = e.LastName, Age = e.Age };
+
+            //foreach (var item in result)
+            //{
+
+            //    Console.WriteLine(item.Firstname + " AGE " +item.Age);
+            //}
+
+            // 5. Упорядочить имена и фамилии сотрудников по алфавиту, которые проживают в Украине.
+            //var result =
+            //   from e in employees
+            //   join d in departments on e.DepId equals d.Id
+            //   where d.Country == "Ukraine"
+            //   orderby e.FirstName, e.LastName
+            //   select new { Firstname = e.FirstName, Lastname = e.LastName };
+
+            //foreach (var item in result)
+            //{
+
+            //    Console.WriteLine(item.Firstname + " " + item.Lastname);
+            //}
+
+            // 6.  Отсортировать сотрудников по возрастам, по убыванию. Вывести Id, FirstName, LastName, Age
+            //var result = employees.OrderByDescending(e =>e.Age);
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item.FirstName + " " + item.LastName + " Age " + item.Age + " id " + item.Id);
+            //}
+
+            //7. Сгруппировать студентов по возрасту. Вывести возраст и сколько раз он встречается в списке. 
+            var result = from e in employees
+                         group e by e.Age into g
+                         select new { Age = g.Key, Count = g.Count() };
 
             foreach (var item in result)
             {
 
-                Console.WriteLine(item.Firstname + " AGE " +item.Age);
+                Console.WriteLine(item.Age + " Count " + item.Count);
             }
 
         }
